@@ -21,23 +21,34 @@ MovieMaster can be deployed on Vercel. This guide covers:
 
 ## 🎛️ Configuration for Vercel
 
-### Environment Variables
+### Environment Variables Setup
 
-Add these to your Vercel project settings:
+**For Vercel Deployments with Backend API:**
 
-```
-VITE_API_BASE_URL=https://your-backend-api.com
-```
+1. Go to Vercel Dashboard → Select your project
+2. Click "Settings" → "Environment Variables"
+3. Add this variable:
 
-### Update Frontend API URL (Optional)
+   | Key | Value |
+   |-----|-------|
+   | `VITE_API_BASE_URL` | `https://your-backend-api.com/api/auth` |
 
-If you need to change the API URL:
+**Example Values:**
+- If backend on Heroku: `https://your-app.herokuapp.com/api/auth`
+- If backend on Railway: `https://your-railway-app.up.railway.app/api/auth`
+- For development: `http://localhost:5000/api/auth` (not needed on Vercel)
 
-**File:** `src/services/authService.js`
+**❗ Important:**
+- Do NOT use `@` prefix - that's only for secrets
+- Just enter the plain URL value
+- Save and redeploy after updating
 
-```javascript
-const API_BASE_URL = process.env.VITE_API_BASE_URL || 'http://localhost:5000/api/auth';
-```
+### If Backend Not Deployed Yet
+
+If you don't have a deployed backend, the app will:
+1. Still load and display movies (from mock data)
+2. Show error when trying to register/login
+3. This is expected until backend is deployed
 
 ---
 
